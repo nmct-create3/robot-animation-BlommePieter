@@ -14,7 +14,8 @@
   /* global page settings */
   --global-html-color: var(--global-color-front);
   --global-html-backgroundColor: var(--global-color-back);
-  --global-selection-backgroundColor: var(--global-color-front);
+  --global-selection-backgroundColor: var(--global-color-front)E6;
+  --global-duration: 0.75s;
 }
 
 /*------------------------------------*\
@@ -34,6 +35,8 @@ html {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--global-html-backgroundColor);
+  color: var(--global-html-color);
 }
 
 *,
@@ -43,6 +46,12 @@ html {
 }
 
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  gap: 2rem;
 }
 
 /*
@@ -133,15 +142,93 @@ body {
 */
 
 .c-robot {
+  fill: var(--global-color-front);
+  width: 300px;
 }
 
 .c-robot__shadow {
+  fill: black;
+  opacity: 0.2;
 }
+
+@keyframes shadowPulse {
+  100% {
+    transform: scale(0.75);
+  }
+}
+
+@keyframes robotHover {
+  0% {
+    transform: translateY(2.5%);
+  }
+  100% {
+    transform: translateY(-2.5%);
+  }
+}
+
+.c-robot--css-anim #Shadow {
+  animation: shadowPulse;
+  animation-duration: var(--global-duration);
+  animation-iteration-count: infinite;  
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  transform-origin: 50% 100%;
+}
+
+.c-robot--css-anim #Robot {
+  animation: robotHover;
+  animation-duration: var(--global-duration);
+  animation-iteration-count: infinite;  
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
 
 
 /*
     Component: Controls
 */
+
+.c-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 6rem;
+  gap: 5rem;
+}
+
+.c-controls__list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.c-controls__button{
+  padding: 8px;
+}
+
+.c-controls__radio:checked + .c-controls__button{
+  background-color: #64A7C0;
+  color: var(--global-color-front);
+  border-radius: 1rem; 
+
+}
+
+.c-controls__button--pause{
+  background-color: #64A7C0;
+  color: var(--global-color-front);
+  border-radius: 1rem; 
+
+}
+
+.c-play-icon--play{
+  display: none;
+}
+
+.c-play-icon--pause{
+  display: block;
+}
 
 /*------------------------------------*\
 #UTILITIES
